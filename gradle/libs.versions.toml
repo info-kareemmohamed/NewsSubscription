@@ -22,6 +22,7 @@ paymobSdk = "1.5.3"
 roomCompiler = "2.6.1"
 roomRuntime = "2.6.1"
 ksp="2.0.21-1.0.27"
+coreSplashscreen = "1.0.1"
 
 
 [libraries]
@@ -56,6 +57,7 @@ androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "ro
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 paymob-sdk = { module = "com.paymob.sdk:Paymob-SDK", version.ref = "paymobSdk" }
+androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
 
 
 [plugins]
