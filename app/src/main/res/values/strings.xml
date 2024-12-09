@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">News</string>
+
+    <string name="hello_">Hello!</string>
+    <string name="hello">Hello</string>
+    <string name="again">Again!</string>
+    <string name="dont_have_an_account">don\'t have an account ?</string>
+    <string name="welcome_back_youve_been_missed">Welcome back, you\'ve \nbeen missed</string>
+    <string name="remember_me">Remember me</string>
+    <string name="forgot_the_password">Forgot the password ?</string>
+    <string name="sign_up_to_get_started">SignUp to get Started</string>
+    <string name="or_connect_with">or connect with</string>
+    <string name="google">Google</string>
+    <string name="user_name">User Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="already_have_an_account">Already have an account ?</string>
+    <string name="login">Login</string>
+    <string name="sign_up">SignUp</string>
+
+    <!--  ValidationError-->
+    <string name="email_cannot_be_empty">Email cannot be empty</string>
+    <string name="invalid_email_format">Invalid email format</string>
+    <string name="password_cannot_be_empty">Password cannot be empty</string>
+    <string name="password_must_be_at_least_6_characters">Password must be at least 6 characters</string>
+    <string name="username_cant_be_empty">Username can\'t be empty</string>
+    <string name="username_should_be_at_least_3_characters">Username should be at least 3 characters</string>
+    <string name="username_should_not_exceed_20_characters">Username should not exceed 20 characters</string>
+    <string name="username_should_only_contain_letters_and_spaces">Username should only contain letters and spaces</string>
+
+    <!--  AuthError-->
+    <string name="network_error">A network error occurred. Please try again later.</string>
+    <string name="invalid_credentials">Please check your email or password.</string>
+    <string name="user_disabled">Your account is disabled. Please contact support.</string>
+    <string name="email_already_in_use">The email you entered is already in use.</string>
+    <string name="user_not_found">No user found with this email address. Please contact support.</string>
+    <string name="unknown_error">An unknown error occurred. Please try again later.</string>
+    <string name="email_already_exists">The email address is already registered. Please choose another email.</string>
+    <string name="internal_error">An internal error occurred. Please try again later.</string>
+    <string name="insufficient_permission">You do not have sufficient permissions to perform this action.</string>
+    <string name="invalid_argument">An invalid argument was provided. Please check and try again.</string>
+    <string name="forgot_password_email_sent">A password reset email has been sent to your email. Check your inbox to reset your password.</string>
+    <string name="email_not_found">This email is not registered. Please check or sign up for a new account.</string>
+
+
+    <!--  PaymentScreen-->
+    <string name="close">Close</string>
+    <string name="subscription">Subscription</string>
+    <string name="subscription_duration">Subscription duration:</string>
+    <string name="start_date">Start date:</string>
+    <string name="end_date">End date:</string>
+    <string name="months">months</string>
+
+
+    <!--    AlarmScreen-->
+    <string name="alarm_will_ring_weekly">The alarm will ring weekly on the same day:</string>
+    <string name="enable_alarm">Enable alarm</string>
+    <string name="set_alarm">Set</string>
+
+</resources>
