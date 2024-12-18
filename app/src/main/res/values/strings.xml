@@ -23,6 +23,7 @@
     <string name="email_cannot_be_empty">Email cannot be empty</string>
     <string name="invalid_email_format">Invalid email format</string>
     <string name="password_cannot_be_empty">Password cannot be empty</string>
+    <string name="confirm_password_do_not_match">Password and confirm password do not match.</string>
     <string name="password_must_be_at_least_6_characters">Password must be at least 6 characters</string>
     <string name="username_cant_be_empty">Username can\'t be empty</string>
     <string name="username_should_be_at_least_3_characters">Username should be at least 3 characters</string>
