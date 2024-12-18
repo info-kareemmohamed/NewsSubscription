@@ -10,20 +10,31 @@ coreKtx = "1.15.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
+kotlinxCoroutinesTest = "1.9.0"
 lifecycleRuntimeKtx = "2.8.7"
 activityCompose = "1.9.3"
 composeBom = "2024.04.01"
 hiltPlugin = "2.51.1"
 lottieCompose = "6.6.0"
 materialIconsExtended = "1.7.5"
+mockk = "1.13.7"
 pagingCompose = "3.2.0-rc01"
 pagingRuntime = "3.1.1"
 paymobSdk = "1.5.3"
+playServicesAuth = "21.2.0"
 roomCompiler = "2.6.1"
 roomRuntime = "2.6.1"
 ksp="2.0.21-1.0.27"
 coreSplashscreen = "1.0.1"
-
+firebaseBom = "33.7.0"
+firebaseFirestore = "25.1.1"
+firebaseAnalytics = "22.1.2"
+firebaseAuth = "23.1.0"
+navigationCompose = "2.8.0-beta06"
+credentialsPlayServicesAuth = "1.5.0-beta01"
+googleid = "1.1.1"
+googleGmsGoogleServices = "4.4.2"
+turbine = "1.0.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -46,7 +57,10 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroid" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
 lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottieCompose" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "converterGson" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
 androidx-paging-compose = { module = "androidx.paging:paging-compose", version.ref = "pagingCompose" }
@@ -58,7 +72,17 @@ androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 paymob-sdk = { module = "com.paymob.sdk:Paymob-SDK", version.ref = "paymobSdk" }
 androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
+firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics", version.ref = "firebaseAnalytics" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
+androidx-compose-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref="navigationCompose"}
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version = "1.6.3" }
 
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+androidx-credentials = { module = "androidx.credentials:credentials", version.ref = "credentialsPlayServicesAuth" }
+androidx-credentials-play-services-auth = { module = "androidx.credentials:credentials-play-services-auth", version.ref = "credentialsPlayServicesAuth" }
+googleid = { module = "com.google.android.libraries.identity.googleid:googleid", version.ref = "googleid" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -66,6 +90,9 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 daggerHiltAndroid = { id = "com.google.dagger.hilt.android", version.ref = "hiltPlugin" }
 devtools-ksp={id="com.google.devtools.ksp", version.ref="ksp"}
+google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
+jetbrains-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+
 
 [bundles]
 compose = [
@@ -83,7 +110,11 @@ testing = [
     "junit",
     "androidx-junit",
     "androidx-espresso-core",
-    "androidx-ui-test-junit4"
+    "androidx-ui-test-junit4",
+    "turbine",
+    "mockk",
+    "kotlinx-coroutines-test"
+
 ]
 
 debug = [
@@ -95,7 +126,10 @@ androidTest = [
     "androidx-ui-test-junit4",
     "androidx-ui-test-manifest",
     "androidx-espresso-core",
-    "androidx-junit"
+    "androidx-junit",
+    "turbine",
+    "mockk",
+    "kotlinx-coroutines-test"
 ]
 
 hilt = [
@@ -117,4 +151,17 @@ room = [
     "androidx-room-ktx",
     "androidx-room-paging",
     "androidx-room-runtime"
+]
+
+firebase=[
+    "firebase-firestore",
+    "firebase-analytics",
+    "firebase-auth",
+]
+
+google_auth=[
+    "androidx-credentials",
+    "androidx-credentials-play-services-auth",
+    "play-services-auth",
+    "googleid"
 ]
