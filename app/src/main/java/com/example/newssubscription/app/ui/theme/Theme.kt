@@ -1,4 +1,4 @@
-package com.example.newssubscription.ui.theme
+package com.example.newssubscription.app.ui.theme
 
 import android.app.Activity
 import android.os.Build
