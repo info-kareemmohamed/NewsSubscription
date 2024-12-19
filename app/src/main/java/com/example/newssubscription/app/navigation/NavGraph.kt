@@ -13,6 +13,7 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import com.example.newssubscription.authentication.presentation.navigation.addAuthenticationGraph
 import com.example.newssubscription.core.presentation.MainViewModel
+import com.example.newssubscription.onboarding.presentation.navigation.addOnBoardingGraph
 
 @Composable
 fun NavGraph(startDestination: Routes, viewModel: MainViewModel) {
@@ -23,9 +24,9 @@ fun NavGraph(startDestination: Routes, viewModel: MainViewModel) {
         startDestination = startDestination
     ) {
 
-        addAuthenticationGraph(
-            navController = navController,
-        )
+        addOnBoardingGraph()
+
+        addAuthenticationGraph(navController)
 
         navigation<Routes.NewsNavigation>(
             startDestination = Routes.HomeScreen
