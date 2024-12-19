@@ -19,6 +19,11 @@
     <string name="login">Login</string>
     <string name="sign_up">SignUp</string>
 
+    <!--  OnBoardingScreen-->
+    <string name="back">Back</string>
+    <string name="next">Next</string>
+    <string name="get_started">Get Started</string>
+
     <!--  ValidationError-->
     <string name="email_cannot_be_empty">Email cannot be empty</string>
     <string name="invalid_email_format">Invalid email format</string>
