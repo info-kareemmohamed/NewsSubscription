@@ -53,6 +53,16 @@ android {
                 "FIREBASE_SERVER_CLIENT_ID",
                 properties.getProperty("FIREBASE_SERVER_CLIENT_ID")
             )
+            it.buildConfigField(
+                "String",
+                "API_KEY",
+                properties.getProperty("API_KEY")
+            )
+            it.buildConfigField(
+                "String",
+                "BASE_URL",
+                properties.getProperty("BASE_URL")
+            )
         }
     }
     compileOptions {
