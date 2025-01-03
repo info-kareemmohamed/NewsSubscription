@@ -19,6 +19,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import com.example.newssubscription.app.navigation.Routes
+import com.example.newssubscription.news.presentation.bookmark.BookmarkScreenRoot
 import com.example.newssubscription.news.presentation.home.HomeScreenRoot
 import com.example.newssubscription.news.presentation.search.SearchScreenRoot
 
@@ -88,7 +89,9 @@ private fun NewsNavigator() {
                 SearchScreenRoot(navigateToDetails = { articleUrl -> })
             }
 
-            composable<Routes.BookmarkScreen> { Box(Modifier.fillMaxSize()) }
+            composable<Routes.BookmarkScreen> {
+                BookmarkScreenRoot(navigate = { articleUrl -> })
+            }
 
             composable<Routes.SettingsScreen> { Box(Modifier.fillMaxSize()) }
         }
