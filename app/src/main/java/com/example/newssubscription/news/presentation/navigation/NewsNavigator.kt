@@ -20,6 +20,7 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import com.example.newssubscription.app.navigation.Routes
 import com.example.newssubscription.news.presentation.home.HomeScreenRoot
+import com.example.newssubscription.news.presentation.search.SearchScreenRoot
 
 
 fun NavGraphBuilder.addNewsNavigatorGraph() {
@@ -78,9 +79,14 @@ private fun NewsNavigator() {
             modifier = Modifier.padding(bottom = bottomPadding)
         ) {
             composable<Routes.HomeScreen> {
-                HomeScreenRoot(navigateToSearch = {}, navigateToDetails = { articleUrl -> })
+                HomeScreenRoot(navigateToSearch = {
+                    navigateToTab(navController, Routes.SearchScreen)
+                },
+                    navigateToDetails = { articleUrl -> })
             }
-            composable<Routes.SearchScreen> { Box(Modifier.fillMaxSize()) }
+            composable<Routes.SearchScreen> {
+                SearchScreenRoot(navigateToDetails = { articleUrl -> })
+            }
 
             composable<Routes.BookmarkScreen> { Box(Modifier.fillMaxSize()) }
 
