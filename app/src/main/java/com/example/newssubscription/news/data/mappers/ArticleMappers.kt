@@ -42,5 +42,20 @@ fun ArticleEntity.toArticle(): Article =
         title = title,
         url = url,
         imageUrl = imageUrl,
+        isBookMarked = isBookMarked
+    )
+
+fun Article.toArticleEntity(): ArticleEntity =
+    ArticleEntity(
+        author = author,
+        content = content,
+        description = description,
+        publishedAt = publishedAt,
+        sourceName = sourceName,
+        title = title,
+        url = url,
+        imageUrl = imageUrl,
+        isBookMarked = isBookMarked,
+        isCached = false
     )
 
