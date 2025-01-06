@@ -35,6 +35,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.newssubscription.R
 import com.example.newssubscription.app.ui.Dimens.MediumPadding_24
 import com.example.newssubscription.app.ui.theme.NewsSubscriptionTheme
+import com.example.newssubscription.news.domain.model.Article
 import com.example.newssubscription.news.presentation.common.ArticlesList
 import com.example.newssubscription.news.presentation.common.SearchBar
 
@@ -43,7 +44,7 @@ import com.example.newssubscription.news.presentation.common.SearchBar
 fun HomeScreenRoot(
     viewModel: HomeViewModel = hiltViewModel(),
     navigateToSearch: () -> Unit,
-    navigateToDetails: (articleUrl: String) -> Unit
+    navigateToDetails: (article:Article) -> Unit
 ) {
     val state = viewModel.state.value
 
@@ -63,7 +64,7 @@ private fun HomeScreen(
     state: HomeState,
     loadArticles: () -> Unit,
     navigateToSearch: () -> Unit,
-    navigateToDetails: (articleUrl: String) -> Unit
+    navigateToDetails: (article:Article) -> Unit
 ) {
     val articles = state.articles?.collectAsLazyPagingItems()
 
@@ -143,7 +144,7 @@ private fun HomeScreen(
                 modifier = Modifier.padding(horizontal = MediumPadding_24),
                 articles = articles,
                 onClick = { article ->
-                    navigateToDetails(article.url)
+                    navigateToDetails(article)
                 }
             )
         }
