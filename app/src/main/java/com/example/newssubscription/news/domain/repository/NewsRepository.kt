@@ -16,4 +16,6 @@ interface NewsRepository {
     suspend fun bookmarkArticle(url: String)
 
     suspend fun unBookmarkArticle(url: String)
+
+    suspend fun toggleOrInsertBookmark(article: Article)
 }
