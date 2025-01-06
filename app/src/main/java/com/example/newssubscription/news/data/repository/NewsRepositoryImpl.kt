@@ -8,6 +8,7 @@ import androidx.paging.map
 import com.example.newssubscription.news.data.local.NewsDao
 import com.example.newssubscription.news.data.local.NewsDatabase
 import com.example.newssubscription.news.data.mappers.toArticle
+import com.example.newssubscription.news.data.mappers.toArticleEntity
 import com.example.newssubscription.news.data.paging.NewsRemoteMediator
 import com.example.newssubscription.news.data.paging.SearchNewsPaging
 import com.example.newssubscription.news.data.remote.NewsApi
@@ -54,12 +55,14 @@ class NewsRepositoryImpl @Inject constructor(
         }
     ).flow
 
-
     override suspend fun getArticleByUrl(url: String): Article? = dao.getArticle(url)?.toArticle()
 
     override suspend fun bookmarkArticle(url: String) = dao.updateBookmarkStatus(url, true)
 
     override suspend fun unBookmarkArticle(url: String) = dao.updateBookmarkStatus(url, false)
+
+    override suspend fun toggleOrInsertBookmark(article: Article) =
+        dao.toggleOrInsertBookmark(article.toArticleEntity())
 
     override fun getBookMarkedArticles(): Flow<List<Article>> =
         dao.getBookmarkedArticles().map { articles ->

@@ -18,10 +18,14 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.example.newssubscription.app.navigation.Routes
+import com.example.newssubscription.news.domain.model.Article
 import com.example.newssubscription.news.presentation.bookmark.BookmarkScreenRoot
+import com.example.newssubscription.news.presentation.details.DetailsScreenRoot
 import com.example.newssubscription.news.presentation.home.HomeScreenRoot
 import com.example.newssubscription.news.presentation.search.SearchScreenRoot
+import kotlin.reflect.typeOf
 
 
 fun NavGraphBuilder.addNewsNavigatorGraph() {
@@ -83,17 +87,32 @@ private fun NewsNavigator() {
                 HomeScreenRoot(navigateToSearch = {
                     navigateToTab(navController, Routes.SearchScreen)
                 },
-                    navigateToDetails = { articleUrl -> })
+                    navigateToDetails = { article ->
+                           navController.navigate(Routes.DetailsScreen(article = article))
+                    })
             }
+
             composable<Routes.SearchScreen> {
-                SearchScreenRoot(navigateToDetails = { articleUrl -> })
+                SearchScreenRoot(navigateToDetails = { article ->
+                    navigateToTab(navController, Routes.DetailsScreen(article = article))
+                })
             }
 
             composable<Routes.BookmarkScreen> {
-                BookmarkScreenRoot(navigate = { articleUrl -> })
+                BookmarkScreenRoot(navigate = { article ->
+                        navController.navigate(Routes.DetailsScreen(article = article))
+                })
             }
 
             composable<Routes.SettingsScreen> { Box(Modifier.fillMaxSize()) }
+
+            composable<Routes.DetailsScreen>(
+                typeMap = mapOf(typeOf<Article>() to CustomNavType.ArticleType)
+            ) {
+                val article = it.toRoute<Routes.DetailsScreen>().article
+                DetailsScreenRoot(article = article,
+                    navigateUp = { navController.navigateUp() })
+            }
         }
     }
 }
@@ -107,7 +126,5 @@ private fun navigateToTab(navController: NavController, route: Routes) {
         launchSingleTop = true
     }
 }
-
-
 
 

@@ -6,6 +6,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.newssubscription.news.domain.model.Article
 import com.example.newssubscription.news.domain.usecase.GetBookMarkedArticlesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -13,12 +16,13 @@ import javax.inject.Inject
 class BookmarkViewModel @Inject constructor(
     private val getArticlesUseCase: GetBookMarkedArticlesUseCase,
 ) : ViewModel() {
-    val articles = mutableStateOf(emptyList<Article>())
+   private val _articles = MutableStateFlow(emptyList<Article>())
+    val articles = _articles.asStateFlow()
 
     init {
         viewModelScope.launch {
-            getArticlesUseCase().collect {
-                articles.value = it
+            getArticlesUseCase().collectLatest {
+                _articles.value = it
             }
         }
     }

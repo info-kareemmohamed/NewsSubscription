@@ -1,5 +1,6 @@
 package com.example.newssubscription.app.navigation
 
+import com.example.newssubscription.news.domain.model.Article
 import kotlinx.serialization.Serializable
 
 sealed interface Routes {
@@ -32,7 +33,7 @@ sealed interface Routes {
     data object SettingsScreen : Routes
 
     @Serializable
-    data class DetailsScreen(val articleUrl: String) : Routes
+    data class DetailsScreen(val article: Article) : Routes
 
     @Serializable
     data object AppStartNavigation : Routes

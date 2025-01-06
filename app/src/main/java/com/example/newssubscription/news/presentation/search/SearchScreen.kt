@@ -14,6 +14,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.news.search.presentation.mvi.SearchViewModel
 import com.example.newssubscription.app.ui.Dimens.MediumPadding_24
 import com.example.newssubscription.app.ui.theme.NewsSubscriptionTheme
+import com.example.newssubscription.news.domain.model.Article
 import com.example.newssubscription.news.presentation.common.ArticlesList
 import com.example.newssubscription.news.presentation.common.SearchBar
 import com.example.newssubscription.news.presentation.search.mvi.SearchIntent
@@ -23,7 +24,7 @@ import com.example.newssubscription.news.presentation.search.mvi.SearchState
 @Composable
 fun SearchScreenRoot(
     viewModel: SearchViewModel = hiltViewModel(),
-    navigateToDetails: (String) -> Unit
+    navigateToDetails: (Article) -> Unit
 ) {
     SearchScreen(
         state = viewModel.state,
@@ -36,7 +37,7 @@ fun SearchScreenRoot(
 private fun SearchScreen(
     state: SearchState,
     event: (SearchIntent) -> Unit,
-    navigateToDetails: (String) -> Unit
+    navigateToDetails: (Article) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -54,7 +55,7 @@ private fun SearchScreen(
 
         state.articles?.let { articles ->
             ArticlesList(articles = articles.collectAsLazyPagingItems()) { article ->
-                navigateToDetails(article.url)
+                navigateToDetails(article)
             }
         }
     }

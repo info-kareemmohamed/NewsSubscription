@@ -17,6 +17,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.newssubscription.R
 import com.example.newssubscription.app.ui.Dimens.ExtraSmallPadding_6
 import com.example.newssubscription.app.ui.Dimens.MediumPadding_24
@@ -28,16 +29,17 @@ import com.example.newssubscription.news.presentation.common.ArticleCard
 @Composable
 fun BookmarkScreenRoot(
     viewModel: BookmarkViewModel = hiltViewModel(),
-    navigate: (String) -> Unit
+    navigate: (article: Article) -> Unit
 ) {
-    BookmarkScreen(articles = viewModel.articles.value, navigate = navigate)
+    val state = viewModel.articles.collectAsStateWithLifecycle()
+    BookmarkScreen(articles = state.value, navigate = navigate)
 }
 
 
 @Composable
 private fun BookmarkScreen(
     articles: List<Article>,
-    navigate: (String) -> Unit
+    navigate: (article: Article) -> Unit
 ) {
 
     Column(
@@ -56,7 +58,7 @@ private fun BookmarkScreen(
 
         ArticlesList(
             articles = articles,
-            onClick = { article -> navigate(article.url) },
+            onClick = { article -> navigate(article) },
         )
     }
 
