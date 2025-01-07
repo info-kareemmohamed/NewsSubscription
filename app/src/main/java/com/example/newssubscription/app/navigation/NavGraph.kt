@@ -20,7 +20,11 @@ fun NavGraph(startDestination: Routes, viewModel: MainViewModel) {
 
         addAuthenticationGraph(navController)
 
-        addNewsNavigatorGraph()
+        addNewsNavigatorGraph{
+            navController.navigate(Routes.LoginScreen) {
+                popUpTo(Routes.NewsNavigation) { inclusive = true }
+            }
+        }
     }
 }
 

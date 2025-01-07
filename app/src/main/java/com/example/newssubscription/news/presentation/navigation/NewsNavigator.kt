@@ -1,6 +1,5 @@
 package com.example.newssubscription.news.presentation.navigation
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -25,22 +24,27 @@ import com.example.newssubscription.news.presentation.bookmark.BookmarkScreenRoo
 import com.example.newssubscription.news.presentation.details.DetailsScreenRoot
 import com.example.newssubscription.news.presentation.home.HomeScreenRoot
 import com.example.newssubscription.news.presentation.search.SearchScreenRoot
+import com.example.newssubscription.news.presentation.settings.SettingsScreenRoot
 import kotlin.reflect.typeOf
 
 
-fun NavGraphBuilder.addNewsNavigatorGraph() {
+fun NavGraphBuilder.addNewsNavigatorGraph(
+    authenticationCallback: () -> Unit
+) {
     navigation<Routes.NewsNavigation>(
         startDestination = Routes.NewsNavigatorScreen
     ) {
         composable<Routes.NewsNavigatorScreen> {
-            NewsNavigator()
+            NewsNavigator(authenticationCallback = authenticationCallback)
         }
     }
 }
 
 
 @Composable
-private fun NewsNavigator() {
+private fun NewsNavigator(
+    authenticationCallback: () -> Unit
+) {
 
     val navController = rememberNavController()
     val currentDestination = navController.currentBackStackEntryAsState().value?.destination
@@ -88,7 +92,7 @@ private fun NewsNavigator() {
                     navigateToTab(navController, Routes.SearchScreen)
                 },
                     navigateToDetails = { article ->
-                           navController.navigate(Routes.DetailsScreen(article = article))
+                        navController.navigate(Routes.DetailsScreen(article = article))
                     })
             }
 
@@ -100,11 +104,15 @@ private fun NewsNavigator() {
 
             composable<Routes.BookmarkScreen> {
                 BookmarkScreenRoot(navigate = { article ->
-                        navController.navigate(Routes.DetailsScreen(article = article))
+                    navController.navigate(Routes.DetailsScreen(article = article))
                 })
             }
 
-            composable<Routes.SettingsScreen> { Box(Modifier.fillMaxSize()) }
+            composable<Routes.SettingsScreen> {
+                SettingsScreenRoot(onLogout = {
+                    authenticationCallback()
+                })
+            }
 
             composable<Routes.DetailsScreen>(
                 typeMap = mapOf(typeOf<Article>() to CustomNavType.ArticleType)

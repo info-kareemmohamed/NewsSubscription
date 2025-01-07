@@ -30,7 +30,7 @@ fun NavGraphBuilder.addAuthenticationGraph(navController: NavController) {
 }
 
 private fun NavController.navigateToHome() {
-    navigate(Routes.HomeScreen) {
+    navigate(Routes.NewsNavigation) {
         popUpTo(Routes.NewsAuthentication) { inclusive = true }
     }
 }
