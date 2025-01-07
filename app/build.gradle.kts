@@ -63,6 +63,16 @@ android {
                 "BASE_URL",
                 properties.getProperty("BASE_URL")
             )
+            it.buildConfigField(
+                "String",
+                "SUPABASE_Key",
+                properties.getProperty("SUPABASE_Key")
+            )
+            it.buildConfigField(
+                "String",
+                "SUPABASE_URL",
+                properties.getProperty("SUPABASE_URL")
+            )
         }
     }
     compileOptions {
@@ -117,5 +127,7 @@ dependencies {
     implementation(platform(libs.firebase.bom))
 
     implementation(libs.androidx.datastore.preferences)
+
+    implementation (libs.bundles.supabase)
 
 }

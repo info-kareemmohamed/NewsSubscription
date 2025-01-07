@@ -1,4 +1,4 @@
-package com.example.newssubscription.core.domain.usecase
+package com.example.newssubscription.news.domain.usecase
 
 import com.example.newssubscription.authentication.domain.repository.AuthRepository
 import javax.inject.Inject

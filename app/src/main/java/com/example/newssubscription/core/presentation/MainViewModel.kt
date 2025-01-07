@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.newssubscription.app.navigation.Routes
 import com.example.newssubscription.core.domain.repository.LocalUserAppEntry
 import com.example.newssubscription.core.domain.usecase.IsUserSignedInUseCase
-import com.example.newssubscription.core.domain.usecase.SignOutUseCase
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -17,7 +16,6 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val isUserSignedInUseCase: IsUserSignedInUseCase,
     localUserAppEntry: LocalUserAppEntry,
-    private val signOutUseCase: SignOutUseCase
 ) : ViewModel() {
 
     private var _keepOnScreenCondition: MutableState<Boolean> = mutableStateOf(true)
@@ -43,11 +41,5 @@ class MainViewModel @Inject constructor(
         }
         delay(600) //Without this delay, the onBoarding screen will show for a momentum.
         _keepOnScreenCondition.value = false
-    }
-
-
-    fun signOut() {
-        signOutUseCase()
-        _startDestination.value = Routes.NewsAuthentication
     }
 }
