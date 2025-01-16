@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.newssubscription.R
+import com.example.newssubscription.alarm.presentation.AlarmScreen
 import com.example.newssubscription.app.ui.theme.NewsSubscriptionTheme
 import com.example.newssubscription.news.presentation.settings.components.PickImageBottomSheet
 import com.example.newssubscription.news.presentation.settings.components.ProfileImage
@@ -186,13 +187,14 @@ private fun SettingsScreen(
                 ),
             )
 
+            if (showAlarmBottomSheet) {
+                AlarmScreen {
+                    showAlarmBottomSheet = false
+                }
+            }
 
         }
-
-
     }
-
-
 }
 
 @Composable
