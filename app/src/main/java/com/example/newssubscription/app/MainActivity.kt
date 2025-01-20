@@ -12,8 +12,8 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.newssubscription.app.navigation.NavGraph
-import com.example.newssubscription.core.presentation.MainViewModel
 import com.example.newssubscription.app.ui.theme.NewsSubscriptionTheme
+import com.example.newssubscription.core.presentation.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
                         val startDestination = mainViewModel.startDestination.value
                         NavGraph(
                             startDestination = startDestination,
-                            viewModel = mainViewModel
+                            canUserReadArticleUseCase = mainViewModel.canUserReadArticleUseCase
                         )
                     }
                 }

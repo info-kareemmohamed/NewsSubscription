@@ -6,7 +6,11 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hasRoute
@@ -19,23 +23,31 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.example.newssubscription.app.navigation.Routes
+import com.example.newssubscription.core.domain.usecase.CanUserReadArticleUseCase
 import com.example.newssubscription.news.domain.model.Article
 import com.example.newssubscription.news.presentation.bookmark.BookmarkScreenRoot
 import com.example.newssubscription.news.presentation.details.DetailsScreenRoot
 import com.example.newssubscription.news.presentation.home.HomeScreenRoot
 import com.example.newssubscription.news.presentation.search.SearchScreenRoot
 import com.example.newssubscription.news.presentation.settings.SettingsScreenRoot
+import com.example.newssubscription.payment.presentation.PaymentScreen
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import kotlin.reflect.typeOf
 
 
 fun NavGraphBuilder.addNewsNavigatorGraph(
-    authenticationCallback: () -> Unit
+    authenticationCallback: () -> Unit,
+    canUserReadArticleUseCase: CanUserReadArticleUseCase
 ) {
     navigation<Routes.NewsNavigation>(
         startDestination = Routes.NewsNavigatorScreen
     ) {
         composable<Routes.NewsNavigatorScreen> {
-            NewsNavigator(authenticationCallback = authenticationCallback)
+            NewsNavigator(
+                authenticationCallback = authenticationCallback,
+                canUserReadArticleUseCase
+            )
         }
     }
 }
@@ -43,7 +55,8 @@ fun NavGraphBuilder.addNewsNavigatorGraph(
 
 @Composable
 private fun NewsNavigator(
-    authenticationCallback: () -> Unit
+    authenticationCallback: () -> Unit,
+    canUserReadArticleUseCase: CanUserReadArticleUseCase
 ) {
 
     val navController = rememberNavController()
@@ -68,6 +81,9 @@ private fun NewsNavigator(
             }
         }
     }
+    var showPaymentDialog by rememberSaveable { mutableStateOf(false) }
+    val coroutineScope = rememberCoroutineScope()
+
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -92,14 +108,27 @@ private fun NewsNavigator(
                     navigateToTab(navController, Routes.SearchScreen)
                 },
                     navigateToDetails = { article ->
-                        navController.navigate(Routes.DetailsScreen(article = article))
+                        checkNavigateToDetails(
+                            canUserReadArticleUseCase = canUserReadArticleUseCase,
+                            article = article,
+                            navController = navController,
+                            showPaymentDialog = { showPaymentDialog = it },
+                            coroutineScope = coroutineScope
+                        )
                     })
             }
 
             composable<Routes.SearchScreen> {
                 SearchScreenRoot(navigateToDetails = { article ->
-                    navigateToTab(navController, Routes.DetailsScreen(article = article))
+                    checkNavigateToDetails(
+                        canUserReadArticleUseCase = canUserReadArticleUseCase,
+                        article = article,
+                        navController = navController,
+                        showPaymentDialog = { showPaymentDialog = it },
+                        coroutineScope = coroutineScope
+                    )
                 })
+
             }
 
             composable<Routes.BookmarkScreen> {
@@ -122,6 +151,9 @@ private fun NewsNavigator(
                     navigateUp = { navController.navigateUp() })
             }
         }
+        if (showPaymentDialog) {
+            PaymentScreen(onDismiss = { showPaymentDialog = false }, premium = false)
+        }
     }
 }
 
@@ -136,3 +168,18 @@ private fun navigateToTab(navController: NavController, route: Routes) {
 }
 
 
+private fun checkNavigateToDetails(
+    canUserReadArticleUseCase: CanUserReadArticleUseCase,
+    article: Article,
+    navController: NavController,
+    showPaymentDialog: (Boolean) -> Unit,
+    coroutineScope: CoroutineScope,
+    articleShownCount: Int = 3
+) {
+    coroutineScope.launch {
+        if (canUserReadArticleUseCase(article.url, articleShownCount)) {
+            showPaymentDialog(false)
+            navController.navigate(Routes.DetailsScreen(article = article))
+        } else showPaymentDialog(true)
+    }
+}

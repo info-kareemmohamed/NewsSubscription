@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.paymob.sdk</groupId>
   <artifactId>Paymob-SDK</artifactId>
-  <version>1.5.3</version>
+  <version>1.5.7</version>
   <packaging>aar</packaging>
   <dependencies>
     <dependency>

@@ -64,4 +64,18 @@
     <string name="enable_alarm">Enable alarm</string>
     <string name="set_alarm">Set</string>
 
+    <!--  PaymentError-->
+    <string name="payment_network_error">Network error. Please check your internet connection and try again.</string>
+    <string name="timeout_error">Request timed out. Please try again later.</string>
+    <string name="bad_request_error">Invalid request. Please try again later.</string>
+    <string name="unauthorized_error">Unauthorized access. Please log in or check your credentials.</string>
+    <string name="forbidden_error">Access denied. You don\'t have permission to perform this action.</string>
+    <string name="not_found_error">Resource not found. Please check the details and try again.</string>
+    <string name="too_many_requests_error">Too many requests. Please wait and try again later.</string>
+    <string name="internal_server_error">Server error. Please try again later.</string>
+    <string name="service_unavailable_error">Service unavailable. Please try again later.</string>
+    <string name="payment_unknown_error">An unknown error occurred. Please try again later.</string>
+
 </resources>
+
+

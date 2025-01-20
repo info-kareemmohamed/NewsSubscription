@@ -48,4 +48,10 @@ class UserRepositoryImpl @Inject constructor(
             firebaseAuth.removeAuthStateListener(authStateListener)
         }
     }
+
+    override suspend fun getUser(): User? {
+        val uid = firebaseAuth.currentUser?.uid ?: return null
+        return firestore.collection(collectionName).document(uid).get().await()
+            .toObject(User::class.java)
+    }
 }
