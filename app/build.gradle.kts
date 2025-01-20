@@ -30,7 +30,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.newssubscription"
-        minSdk = 26
+        minSdk = 27
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -72,6 +72,31 @@ android {
                 "String",
                 "SUPABASE_URL",
                 properties.getProperty("SUPABASE_URL")
+            )
+            it.buildConfigField(
+                "String",
+                "PAYMENT_BASE_URL",
+                properties.getProperty("PAYMENT_BASE_URL")
+            )
+            it.buildConfigField(
+                "String",
+                "Public_Key",
+                properties.getProperty("Public_Key")
+            )
+            it.buildConfigField(
+                "String",
+                "Secret_Key",
+                properties.getProperty("Secret_Key")
+            )
+            it.buildConfigField(
+                "int",
+                "Mobile_Wallet_Payment_Method_ID",
+                properties.getProperty("Mobile_Wallet_Payment_Method_ID")
+            )
+            it.buildConfigField(
+                "int",
+                "Online_Card_Payment_Method_ID",
+                properties.getProperty("Online_Card_Payment_Method_ID")
             )
         }
     }
@@ -128,6 +153,6 @@ dependencies {
 
     implementation(libs.androidx.datastore.preferences)
 
-    implementation (libs.bundles.supabase)
+    implementation(libs.bundles.supabase)
 
 }
