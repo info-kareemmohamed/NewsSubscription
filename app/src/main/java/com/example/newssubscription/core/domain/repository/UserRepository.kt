@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface UserRepository {
     suspend fun updateUser(user: User?)
+    suspend fun getUser(): User?
     fun getAuthenticatedUserAsFlow(): Flow<User?>
     fun isUserSignedIn(): Boolean
 }
