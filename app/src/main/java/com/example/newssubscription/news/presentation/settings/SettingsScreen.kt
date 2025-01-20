@@ -42,13 +42,14 @@ import com.example.newssubscription.news.presentation.settings.components.Profil
 import com.example.newssubscription.news.presentation.settings.mvi.SettingsIntent
 import com.example.newssubscription.news.presentation.settings.mvi.SettingsState
 import com.example.newssubscription.news.presentation.settings.mvi.SettingsViewModel
+import com.example.newssubscription.payment.presentation.PaymentScreen
 
 
 @Composable
 fun SettingsScreenRoot(
     viewModel: SettingsViewModel = hiltViewModel(),
     onLogout: () -> Unit
-){
+) {
     val state = viewModel.state.collectAsStateWithLifecycle()
     SettingsScreen(
         state = state.value,
@@ -131,7 +132,8 @@ private fun SettingsScreen(
             iconId = R.drawable.ic_alarm_clock,
             title = "Alarm",
         ) {
-            showAlarmBottomSheet = true
+            if (state.user?.premium == true) showAlarmBottomSheet = true
+            else showPaymentDialog = true
         }
         Spacer(modifier = Modifier.height(20.dp))
 
@@ -193,6 +195,11 @@ private fun SettingsScreen(
                 }
             }
 
+            if (showPaymentDialog)
+                PaymentScreen(
+                    onDismiss = { showPaymentDialog = false },
+                    premium = state.user?.premium == true
+                )
         }
     }
 }
