@@ -37,6 +37,7 @@ googleid = "1.1.1"
 googleGmsGoogleServices = "4.4.2"
 storageKt = "3.0.2"
 turbine = "1.0.0"
+firebaseMessaging = "24.1.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -87,6 +88,7 @@ androidx-credentials-play-services-auth = { module = "androidx.credentials:crede
 googleid = { module = "com.google.android.libraries.identity.googleid:googleid", version.ref = "googleid" }
 storage-kt = { module = "io.github.jan-tennert.supabase:storage-kt", version.ref = "storageKt" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
+firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging", version.ref = "firebaseMessaging" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -161,6 +163,7 @@ firebase=[
     "firebase-firestore",
     "firebase-analytics",
     "firebase-auth",
+    "firebase-messaging",
 ]
 
 google_auth=[
