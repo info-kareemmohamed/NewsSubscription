@@ -42,6 +42,7 @@ import com.example.newssubscription.news.presentation.settings.components.Profil
 import com.example.newssubscription.news.presentation.settings.mvi.SettingsIntent
 import com.example.newssubscription.news.presentation.settings.mvi.SettingsState
 import com.example.newssubscription.news.presentation.settings.mvi.SettingsViewModel
+import com.example.newssubscription.notification.presentation.NotificationsRequestPermission
 import com.example.newssubscription.payment.presentation.PaymentScreen
 
 
@@ -68,7 +69,7 @@ private fun SettingsScreen(
 
     var showBottomSheet by remember { mutableStateOf(false) }
     var showPaymentDialog by remember { mutableStateOf(false) }
-    var showNotificationsBottomSheet by remember { mutableStateOf(false) }
+    var showNotificationsDialog by remember { mutableStateOf(false) }
     var showAlarmBottomSheet by remember { mutableStateOf(false) }
 
     Column(
@@ -141,7 +142,7 @@ private fun SettingsScreen(
             iconId = R.drawable.ic_notification,
             title = "Notifications",
         ) {
-            showNotificationsBottomSheet = true
+            showNotificationsDialog = true
         }
         Spacer(modifier = Modifier.height(20.dp))
 
@@ -200,6 +201,11 @@ private fun SettingsScreen(
                     onDismiss = { showPaymentDialog = false },
                     premium = state.user?.premium == true
                 )
+            if (showNotificationsDialog) {
+                NotificationsRequestPermission {
+                    showNotificationsDialog = false
+                }
+            }
         }
     }
 }
