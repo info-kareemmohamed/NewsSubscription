@@ -1,6 +1,11 @@
 package com.example.newssubscription.authentication.presentation.login
 
+import android.Manifest
+import android.app.Activity
+import android.content.Context
+import android.content.pm.PackageManager
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import android.os.Build
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,12 +15,15 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.newssubscription.R
@@ -36,6 +44,7 @@ import com.example.newssubscription.authentication.presentation.login.mvi.LoginI
 import com.example.newssubscription.authentication.presentation.login.mvi.LoginState
 import com.example.newssubscription.authentication.presentation.login.mvi.LoginViewModel
 import com.example.newssubscription.authentication.presentation.util.asUiText
+import com.example.newssubscription.notification.data.local.WelcomeNotification
 import kotlinx.coroutines.launch
 
 
@@ -45,8 +54,12 @@ fun LoginScreenRoot(
     navigateToHomeScreen: () -> Unit,
     navigateToSignUpScreen: () -> Unit,
 ) {
+    val context = LocalContext.current
     val state = viewModel.loginState.collectAsStateWithLifecycle()
     val loginSuccessfully = viewModel.loginSuccessfully.collectAsStateWithLifecycle(false)
+
+    // Ask for notification permission
+    SideEffect { askNotificationPermission(context, context as Activity) }
 
     LoginScreen(
         state.value,
@@ -69,7 +82,10 @@ private fun LoginScreen(
     val context = LocalContext.current
 
     LaunchedEffect(loginSuccessfully) {
-        if (loginSuccessfully) navigateToHomeScreen()
+        if (loginSuccessfully) {
+            WelcomeNotification.sendWelcomeNotification(context) // Show welcome notification
+            navigateToHomeScreen()
+        }
     }
 
     Column(
@@ -140,6 +156,24 @@ private fun LoginScreen(
     }
 }
 
+// Ask for notification permission
+private fun askNotificationPermission(context: Context, activity: Activity) {
+    // This is only necessary for API level >= 33 (TIRAMISU)
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        val hasPermission =
+            ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) ==
+                    PackageManager.PERMISSION_GRANTED
+
+        if (!hasPermission) {
+            ActivityCompat.requestPermissions(
+                activity,
+                arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                0
+            )
+        }
+    }
+}
+
 
 @Preview(showBackground = true)
 @Preview(uiMode = UI_MODE_NIGHT_YES)
@@ -155,3 +189,4 @@ fun LoginScreenPreview() {
         )
     }
 }
+
