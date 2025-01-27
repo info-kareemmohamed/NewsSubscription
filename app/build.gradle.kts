@@ -155,4 +155,6 @@ dependencies {
 
     implementation(libs.bundles.supabase)
 
+    implementation(libs.konfetti.compose)
+
 }
