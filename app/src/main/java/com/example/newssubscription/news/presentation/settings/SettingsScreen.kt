@@ -67,7 +67,7 @@ private fun SettingsScreen(
     onLogout: () -> Unit
 ) {
 
-    var showBottomSheet by remember { mutableStateOf(false) }
+    var showPickImageBottomSheet by remember { mutableStateOf(false) }
     var showPaymentDialog by remember { mutableStateOf(false) }
     var showNotificationsDialog by remember { mutableStateOf(false) }
     var showAlarmBottomSheet by remember { mutableStateOf(false) }
@@ -84,7 +84,7 @@ private fun SettingsScreen(
             imageUrl = state.user?.profilePictureUrl ?: "",
             isLoading = state.imageLoading
         ) {
-            showBottomSheet = true
+            showPickImageBottomSheet = true
         }
         Spacer(modifier = Modifier.height(5.dp))
 
@@ -115,15 +115,6 @@ private fun SettingsScreen(
             )
         )
 
-        if (showBottomSheet)
-            PickImageBottomSheet(
-                onDismissRequest = { showBottomSheet = false },
-                onImageChange = { byteArray ->
-                    onIntent(SettingsIntent.OnImageChange(byteArray = byteArray))
-                    showBottomSheet = false
-                }
-
-            )
 
 
         Spacer(modifier = Modifier.height(50.dp))
@@ -190,22 +181,35 @@ private fun SettingsScreen(
                 ),
             )
 
-            if (showAlarmBottomSheet) {
-                AlarmScreen {
-                    showAlarmBottomSheet = false
-                }
+        }
+    }
+
+    if (showPickImageBottomSheet) {
+        PickImageBottomSheet(
+            onDismissRequest = { showPickImageBottomSheet = false },
+            onImageChange = { byteArray ->
+                onIntent(SettingsIntent.OnImageChange(byteArray = byteArray))
+                showPickImageBottomSheet = false
             }
 
-            if (showPaymentDialog)
-                PaymentScreen(
-                    onDismiss = { showPaymentDialog = false },
-                    premium = state.user?.premium == true
-                )
-            if (showNotificationsDialog) {
-                NotificationsRequestPermission {
-                    showNotificationsDialog = false
-                }
-            }
+        )
+    }
+
+    if (showAlarmBottomSheet) {
+        AlarmScreen {
+            showAlarmBottomSheet = false
+        }
+    }
+
+    if (showPaymentDialog) {
+        PaymentScreen(
+            onDismiss = { showPaymentDialog = false },
+            premium = state.user?.premium == true
+        )
+    }
+    if (showNotificationsDialog) {
+        NotificationsRequestPermission {
+            showNotificationsDialog = false
         }
     }
 }
