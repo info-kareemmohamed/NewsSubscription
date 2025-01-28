@@ -7,4 +7,5 @@
     <color name="input_background">#fff</color>
     <color name="placeholder">#A0A3BD</color>
     <color name="shimmer">#C3C3C3</color>
+    <color name="settings_background_row">#FFF1F3F4</color>
 </resources>
