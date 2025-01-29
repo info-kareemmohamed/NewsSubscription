@@ -76,6 +76,13 @@
     <string name="service_unavailable_error">Service unavailable. Please try again later.</string>
     <string name="payment_unknown_error">An unknown error occurred. Please try again later.</string>
 
+    <!--  SearchError-->
+    <string name="error_server_unavailable">Server Unavailable.</string>
+    <string name="error_internet_unavailable">Internet Unavailable.</string>
+    <string name="error_no_internet_connection">No internet connection. Please check your connection and try again.</string>
+    <string name="error_no_results_found">No results found. Please try a different search term.</string>
+    <string name="error_unknown">Unknown Error. Please try again later.</string>
+
 </resources>
 
 

@@ -56,6 +56,7 @@ fun shouldDisplayArticleList(
     articles: LazyPagingItems<Article>,
 ): Boolean {
     val loadState = articles.loadState
+    val context = LocalContext.current
 
     val error = listOfNotNull(
         loadState.refresh as? LoadState.Error,
@@ -69,7 +70,7 @@ fun shouldDisplayArticleList(
                 // Display a toast for non-HTTP exceptions, ignoring specific cases
                 if (error.error !is retrofit2.HttpException) {
                     Toast.makeText(
-                        LocalContext.current, parseErrorMessage(error), Toast.LENGTH_SHORT
+                        LocalContext.current, parseErrorMessage(error,context), Toast.LENGTH_SHORT
                     ).show()
                 }
                 true

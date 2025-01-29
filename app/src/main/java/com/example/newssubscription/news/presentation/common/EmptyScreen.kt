@@ -23,7 +23,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color.Companion.DarkGray
 import androidx.compose.ui.graphics.Color.Companion.LightGray
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
@@ -33,7 +35,9 @@ import com.example.newssubscription.news.presentation.util.parseErrorMessage
 
 @Composable
 fun EmptyScreen(error: LoadState.Error? = null) {
-    val message = parseErrorMessage(error)
+    val context = LocalContext.current
+    val message = parseErrorMessage(error, context)
+
     var startAnimation by remember { mutableStateOf(false) }
     val alphaAnimation by animateFloatAsState(
         targetValue = if (startAnimation) 0.7f else 0f,
@@ -51,13 +55,18 @@ fun EmptyScreen(error: LoadState.Error? = null) {
             painter = painterResource(id = R.drawable.ic_network_error),
             contentDescription = null,
             tint = if (isSystemInDarkTheme()) LightGray else DarkGray,
-            modifier = Modifier.size(120.dp).alpha(alphaAnimation)
+            modifier = Modifier
+                .size(120.dp)
+                .alpha(alphaAnimation)
         )
         Text(
             text = message,
             style = MaterialTheme.typography.bodyMedium,
+            textAlign = TextAlign.Center,
             color = if (isSystemInDarkTheme()) LightGray else DarkGray,
-            modifier = Modifier.padding(10.dp).alpha(alphaAnimation)
+            modifier = Modifier
+                .padding(10.dp)
+                .alpha(alphaAnimation)
         )
     }
 }
