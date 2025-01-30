@@ -9,18 +9,13 @@ import com.example.newssubscription.app.navigation.Routes
 import com.example.newssubscription.core.domain.repository.LocalUserAppEntry
 import com.example.newssubscription.core.domain.repository.UserRepository
 import com.example.newssubscription.core.domain.usecase.CanUserReadArticleUseCase
-import com.example.newssubscription.core.domain.usecase.CheckPremiumExpirationUseCase
-import com.example.newssubscription.core.domain.usecase.RestartFreeReadDateUseCase
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
     val canUserReadArticleUseCase: CanUserReadArticleUseCase,
-    private val restartFreeReadDateUseCase: RestartFreeReadDateUseCase,
-    private val checkPremiumExpirationUseCase: CheckPremiumExpirationUseCase,
     private val userRepository: UserRepository,
     localUserAppEntry: LocalUserAppEntry,
 ) : ViewModel() {
@@ -33,7 +28,6 @@ class MainViewModel @Inject constructor(
 
 
     init {
-        viewModelScope.launch { handleUserInitialization() }
         localUserAppEntry.readAppEntry().onEach { startFromNews ->
             setStartDestination(startFromNews)
         }.launchIn(viewModelScope)
@@ -50,14 +44,5 @@ class MainViewModel @Inject constructor(
         delay(600) //Without this delay, the onBoarding screen will show for a momentum.
         _keepOnScreenCondition.value = false
     }
-
-
-    private suspend fun handleUserInitialization() {
-        userRepository.getUser()?.let { user ->
-            if (user.premium) checkPremiumExpirationUseCase(user)
-            else restartFreeReadDateUseCase(user)
-        }
-    }
-
 
 }
