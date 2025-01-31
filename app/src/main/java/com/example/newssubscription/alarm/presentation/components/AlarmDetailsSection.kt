@@ -64,6 +64,9 @@ fun AlarmDetailsSection(
             colors = TimePickerDefaults.colors(
                 timeSelectorSelectedContainerColor = MaterialTheme.colorScheme.primary,
                 timeSelectorSelectedContentColor = Color.White,
+                timeSelectorUnselectedContainerColor = MaterialTheme.colorScheme.background,
+                containerColor = MaterialTheme.colorScheme.background,
+                clockDialColor =  MaterialTheme.colorScheme.background,
                 periodSelectorSelectedContainerColor = MaterialTheme.colorScheme.primary,
             )
         )
