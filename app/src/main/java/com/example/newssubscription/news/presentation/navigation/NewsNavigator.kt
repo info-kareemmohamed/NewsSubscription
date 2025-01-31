@@ -174,7 +174,7 @@ private fun checkNavigateToDetails(
     navController: NavController,
     showPaymentDialog: (Boolean) -> Unit,
     coroutineScope: CoroutineScope,
-    articleShownCount: Int = 3
+    articleShownCount: Int = 4
 ) {
     coroutineScope.launch {
         if (canUserReadArticleUseCase(article.url, articleShownCount)) {

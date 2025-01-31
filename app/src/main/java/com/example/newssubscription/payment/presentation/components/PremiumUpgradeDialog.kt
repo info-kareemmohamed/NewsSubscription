@@ -127,7 +127,7 @@ fun PremiumUpgradeDialog(
                         }
 
                         val features = listOf(
-                            "Get unlimited views – unlike the free plan with only 20 articles per day",
+                            "Get unlimited views – unlike the free plan with only 4 articles per day",
                             "Activate the alarm to schedule article reading, a feature not available in the free version"
                         )
 
