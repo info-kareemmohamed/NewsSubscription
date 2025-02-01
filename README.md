@@ -5,6 +5,9 @@ News Subscription
 <p align="center"> ⚡️ News Subscription is an app for reading and subscribing to news. Free users can read limited articles daily, save articles, and receive notifications. Prime users get unlimited access and extra features like setting reading alarms. The app also offers multiple subscription plans, with payment options available via Visa or digital wallets. Additionally, it sends notifications for new news updates using Firebase Cloud Messaging (FCM). </p>
 
 
+I wrote documentation to explain the app's logic for beginners and those implementing it in other frameworks like Flutter. I also want to clarify a few points: [PDFNews Subscription.pdf](https://github.com/user-attachments/files/18630003/PDFNews.Subscription.pdf)
+
+
 ## Preview 📱
 
 https://github.com/user-attachments/assets/4edfecdd-19fe-4c8a-88d7-a180f09ff917
