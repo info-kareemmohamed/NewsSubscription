@@ -10,7 +10,7 @@ I wrote documentation to explain the app's logic for beginners and those impleme
 
 ## Preview 📱
 
-https://github.com/user-attachments/assets/4edfecdd-19fe-4c8a-88d7-a180f09ff917
+[preview.webm](https://github.com/user-attachments/assets/4edfecdd-19fe-4c8a-88d7-a180f09ff917)
 
 ## Features ✨
 - Onboarding: Guides new users through the app
@@ -82,7 +82,7 @@ https://github.com/user-attachments/assets/4edfecdd-19fe-4c8a-88d7-a180f09ff917
 <img width="150" src="https://github.com/user-attachments/assets/e076c64d-879c-4c0a-bf33-ebc0338db5ec">
 <img width="150" src="https://github.com/user-attachments/assets/f9ad667f-4b36-4df3-a243-a3116164c78d">
 
-### Techniques 🛠
+### Techniques & Tools 🛠
 - Android (Kotlin)
 - Jetpack Compose
 - Hilt (Dependency Injection)
